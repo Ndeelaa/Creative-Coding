@@ -38,7 +38,7 @@ setTimeout(() => msg.remove(), 3000);
     ctx.shadowBlur= 6;
 
 //Effect Setting
-  let size= canvas.width<canvas.height? canvas.width * 0.2: canvas.height*0.2;
+  let size= canvas.width<canvas.height? canvas.width * 0.3: canvas.height*0.3;
   const maxLevel= 6;
   const branches=1;
   let sides = 5;
