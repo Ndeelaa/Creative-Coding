@@ -1,4 +1,29 @@
+
+
 window.addEventListener('load',function(){
+
+  // 🔔 Welcome message
+const msg = document.createElement('div');
+msg.innerText = 'Bienvenido in Ndeela work ✨';
+msg.style.position = 'fixed';
+msg.style.top = '20px';
+msg.style.right = '20px';
+msg.style.padding = '12px 18px';
+msg.style.background = 'rgba(0,0,0,0.7)';
+msg.style.color = 'white';
+msg.style.borderRadius = '12px';
+msg.style.fontFamily = 'Georgia, serif';
+msg.style.zIndex = '9999'; // 🔥 VERY IMPORTANT
+document.body.appendChild(msg);
+
+setTimeout(() => {
+  msg.style.opacity = '0';
+  msg.style.transition = 'opacity 0.5s';
+}, 2500);
+
+setTimeout(() => msg.remove(), 3000);
+
+
     const canvas= document.getElementById('canvas1');
     const ctx= canvas.getContext('2d');
     canvas.width= window.innerWidth;
@@ -10,17 +35,17 @@ window.addEventListener('load',function(){
     ctx.shadowColor='black';
     ctx.shadowOffsetX= 10;
     ctx.shadowOffsetY= 5;
-    ctx.shadowBlur= 5;
+    ctx.shadowBlur= 6;
 
 //Effect Setting
-  let size= canvas.width<canvas.height? canvas.width * 0.3: canvas.height*0.3;
+  let size= canvas.width<canvas.height? canvas.width * 0.09: canvas.height*0.08;
   const maxLevel= 6;
-  const branches=2;
+  const branches=1;
   let sides = 5;
-  let scale = 0.5;
+  let scale = 0.7;
   let spread = 0.7;
   let color = 'blue';
-  let lineWidth= Math.floor(Math.random()*20 + 10);
+  let lineWidth= Math.floor(Math.random()*10 + 1);
 
   
 //Controls
@@ -29,7 +54,7 @@ const randomizeButton = document.getElementById('randomizeButton');
 const resetButton = document.getElementById('resetButton');
 const slider_spread = document.getElementById('spread');
 const label_spread = document.querySelector('[for= "spread"]');
-slider_spread.addEventListener('change', function(e){
+slider_spread.addEventListener('input', function(e){
   spread = e.target.value;
   updateSliders()
   drawFractal()
@@ -37,17 +62,20 @@ slider_spread.addEventListener('change', function(e){
 
 slider_sides= document.getElementById('sides');
 label_sides = document.querySelector('[for= "sides"]');
-slider_sides.addEventListener('change', function(e){
+slider_sides.addEventListener('input', function(e){
   sides = e.target.value;
   updateSliders()
   drawFractal()
 })
 
+let pointX= 0;
+let pointY= size;
 //Starting with fractals
   function drawBranch(level){
     if(level > maxLevel) return;
     ctx.beginPath();
-    ctx.moveTo(0,0);
+    ctx.moveTo(pointX,pointY);
+    ctx.bezierCurveTo(0, size * spread * -3, size * 5, 20, 30, 30);
     ctx.lineTo(size,0);
     ctx.stroke();
 
@@ -57,7 +85,7 @@ slider_sides.addEventListener('change', function(e){
 {
     ctx.save();
 
-    ctx.translate(size-(size/branches) * i,0);
+    ctx.translate(pointX,pointY);
     ctx.scale(scale,scale);
 
     ctx.save();
@@ -65,16 +93,20 @@ slider_sides.addEventListener('change', function(e){
     drawBranch(level + 1);
     ctx.restore();
 
-
-
     ctx.save();
     ctx.rotate(-spread);
     drawBranch(level + 1);
     ctx.restore();
 
+    
+
     ctx.restore();
     
 }
+
+    ctx.beginPath()
+    ctx.arc(-size,size,size*0.2,0,Math.PI * 2);
+    ctx.fill ();
    
   }
 
@@ -89,6 +121,7 @@ function drawFractal(){
   ctx.save();
   ctx.lineWidth= lineWidth;
   ctx.strokeStyle= color;
+  ctx.fillStyle= color;
   ctx.translate(canvas.width/2,canvas.height/2);
 
  
@@ -96,6 +129,7 @@ function drawFractal(){
     
     ctx.rotate((Math.PI * 2)/sides);
     drawBranch(0);
+
 }
   ctx.restore();
   randomizeButton.style.backgroundColor = color;
@@ -149,4 +183,20 @@ function updateSliders(){
   label_sides.innerText= 'Sides:' + sides;
 }
 updateSliders()
+
+window.addEventListener('resize', function(){
+  size= canvas.width<canvas.height? canvas.width * 0.3: canvas.height*0.3;
+  canvas.width= window.innerWidth;
+  canvas.height= window.innerHeight;
+  ctx.shadowColor='black';
+  ctx.shadowOffsetX= 10;
+  ctx.shadowOffsetY= 5;
+  ctx.shadowBlur= 6;
+
+  drawFractal();
+
+
+})
+
+
 });

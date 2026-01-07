@@ -28,28 +28,21 @@
 
  [//]: <> (Dot Code.)
 
- ### a. Code HTML pour un point
-![alt text](screenshot.png) 
+ ### a. Code HTML pour un boutton (randomize)
+![alt text](image.png)
 
-### b. Code CSS pour un point
+ ### b. Code HTML pour le centre de controle
 
-![alt text](screenshot1.png)
+ ![alt text](image-1.png)
 
-### c. Créer un point au click
+ ### c. Code js pour une ligne
 
-![alt text](screenshot2.png)
+ ![alt text](image-2.png)
 
-### d. Créer une nouvelle fleur au click
+ ### d. Code js pour les sliders
 
-![alt text](screenshot3.png)
+ ![alt text](image-3.png)
 
+ ### e. Code js pour générer un fractal(l'art que l'on va voir sur le canva)
 
-### e. Déplacer une image avec la souris
-
-![alt text](screenshot4.png)
-
-### f. Former un bouquet avec toutes les fleurs (touche A)
-
-![alt text](screenshot5.png)
-
-Démarrage du projet sur Github.
+ ![alt text](image-4.png)
